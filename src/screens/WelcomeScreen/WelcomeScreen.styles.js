@@ -1,48 +1,48 @@
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 import { colors } from "../../utils/colors";
 
 export const WelcomeScreenStyles = StyleSheet.create({
-    root: {
-        width: "96%",
-        marginHorizontal: "2%",
-        backgroundColor: "white",
-        justifyContent: "flex-start",
-        alignItems: "center"
-    },
-    textContainer: {
-        paddingHorizontal: 10,
-        textAlign: "center",
-        width: "100%"
-    },
-    cardsContainer: {
-        width: "100%",
-    },
-    row: {
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "space-around",
-        flexDirection: "row"
-    },
-    line: {
-        width: "40%",
-        height: 2,
-        backgroundColor: "grey",
-        marginVertical: 15
-    },
-    whyus: {
-        width: "100%",
-        textAlign: "left",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    whyuscard: {
-        height: 50,
-        width: "90%",
-        borderWidth: 2,
-        borderLeftWidth: 5,
-        borderColor: colors.main,
-        justifyContent: "center",
-        alignItems: "flex-start",
-        marginVertical: 10
-    }
-})
+  root: {
+    flex: 1,
+  },
+  title: {
+    alignSelf: "center",
+    marginLeft: 25,
+    marginTop: 0,
+    lineHeight: 50,
+    marginTop: 15,
+  },
+  top: {
+    height: "35%",
+    marginTop: StatusBar.currentHeight,
+  },
+  cardsContainer: {
+    height: "65%",
+    width: "80%",
+    flexDirection: "row",
+    alignSelf: "center",
+    marginTop: "auto",
+    marginBottom: "10%",
+    justifyContent: "space-between",
+  },
+  cardsColumn1: {
+    alignSelf: "flex-end",
+    justifyContent: "space-around",
+  },
+  cardsColumn2: {
+    justifyContent: "space-around",
+    alignSelf: "flex-start",
+  },
+  callButton: {
+    height: 70,
+    width: 70,
+    borderRadius: 200,
+    backgroundColor: colors.main,
+    position: "absolute",
+    bottom: 23,
+    right: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 10,
+  },
+});

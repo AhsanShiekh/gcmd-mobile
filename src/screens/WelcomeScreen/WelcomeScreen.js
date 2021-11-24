@@ -1,48 +1,77 @@
-import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import {colors} from "../../utils/colors"
-import AppText from '../../components/AppText/AppText';
-import { WelcomeScreenStyles } from './WelcomeScreen.styles';
-import CardLink from '../../components/CardLink/CardLink';
+import React from "react";
+import {
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  Platform,
+  Linking,
+} from "react-native";
+import background from "../../../assets/home-bg.png";
+import Hamburger from "../../components/Hamburger/Hamburger";
+import { WelcomeScreenStyles } from "./WelcomeScreen.styles";
+import AppText from "../../components/AppText/AppText";
+import CardLink from "../../components/CardLink/CardLink";
 import reports from "../../../assets/reports.png";
-import news from "../../../assets/news.png";
 import services from "../../../assets/services.png";
+import news from "../../../assets/news.png";
 import feedback from "../../../assets/feedback.png";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const WelcomeScreen = () => {
-    return(
-        <ScrollView contentContainerStyle={WelcomeScreenStyles.root}>
-            <View style={WelcomeScreenStyles.textContainer}>
-                <AppText font="DancingScript" variant="h1" color="black">Genome Center</AppText>
-                <View style={WelcomeScreenStyles.line}/>
-            </View>
-            <View style={WelcomeScreenStyles.cardsContainer}>
-                <View style={WelcomeScreenStyles.row}>
-                    <CardLink image={reports} text="Reports" to="Reports"/>
-                    <CardLink image={services} text="Services" to="Services"/>
-                </View>
-                <View style={WelcomeScreenStyles.row}>
-                    <CardLink image={news} text="News" to="News"/>
-                    <CardLink image={feedback} text="Feedback" to="Feedback"/>
-                </View>
-            </View>
-            <View style={WelcomeScreenStyles.whyus}>
-                <AppText variant="h3" style={{marginVertical: 10}} font="DancingScript">Why Us?</AppText>
-                <View style={WelcomeScreenStyles.whyuscard}>
-                    <AppText variant="h5" font="Poppins" style={{marginLeft: 9}}>Best Results</AppText>
-                </View>
-                <View style={WelcomeScreenStyles.whyuscard}>
-                    <AppText variant="h5" font="Poppins" style={{marginLeft: 9}}>On Time Reports</AppText>
-                </View>
-                <View style={WelcomeScreenStyles.whyuscard}>
-                    <AppText variant="h5" font="Poppins" style={{marginLeft: 9}}>Best Doctors</AppText>
-                </View>
-                <View style={WelcomeScreenStyles.whyuscard}>
-                    <AppText variant="h5" font="Poppins" style={{marginLeft: 9}}>Best Services</AppText>
-                </View>
-            </View>
-        </ScrollView>
-    )
-}
+  const call = () => {
+    let number = "";
+    if (Platform.OS === "ios") {
+      number = "telprompt:${03464342936}";
+    } else {
+      number = "tel:${03464342936}";
+    }
+    Linking.openURL(number);
+  };
+
+  return (
+    <ImageBackground
+      style={WelcomeScreenStyles.root}
+      resizeMode="cover"
+      source={background}
+    >
+      <View style={WelcomeScreenStyles.top}>
+        <Hamburger />
+        <AppText
+          variant="h1"
+          font="Poppins"
+          color="white"
+          style={WelcomeScreenStyles.title}
+        >
+          GENOME CENTER
+        </AppText>
+      </View>
+
+      <View style={WelcomeScreenStyles.cardsContainer}>
+        <View style={WelcomeScreenStyles.cardsColumn1}>
+          <CardLink image={reports} text="REPORTS" to="Reports" />
+          <CardLink image={services} text="SERVICES" to="Services" />
+        </View>
+        <View style={WelcomeScreenStyles.cardsColumn2}>
+          <CardLink image={news} text="NEWS" to="News" />
+          <CardLink image={feedback} text="FEEDBACK" to="Feedback" />
+        </View>
+      </View>
+
+      <View style={WelcomeScreenStyles.callButton}>
+        <TouchableOpacity
+          style={{
+            height: "100%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={() => call()}
+        >
+          <Icon name="phone" size={40} color="white" />
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
+  );
+};
 
 export default WelcomeScreen;
