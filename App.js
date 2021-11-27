@@ -15,9 +15,19 @@ import TimingScreen from "./src/screens/TimingScreen/TimingScreen";
 import AboutScreen from "./src/screens/AboutScreen/AboutScreen";
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import CustomDrawer from "./src/components/Drawer/Drawer";
+import { Provider, useSelector } from "react-redux";
+import store from "./src/redux/store";
+import MessageScreen from "./src/screens/MessageScreen/MessageScreen";
 
-export default function App() {
+const AppWrapper = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+function App() {
   const [fontLoaded, setfontLoaded] = useState(false);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const Drawer = createDrawerNavigator();
 
@@ -69,7 +79,6 @@ export default function App() {
         )}
         screenOptions={options}
         initialRouteName="Welcome"
-        mode="modal"
       >
         <Drawer.Screen
           options={{ headerShown: false }}
@@ -79,7 +88,7 @@ export default function App() {
         <Drawer.Screen
           name="Reports"
           options={{ headerShown: false }}
-          component={ReportsScreen}
+          component={currentUser ? ReportsScreen : LoginScreen}
         />
         <Drawer.Screen
           options={{ headerShown: false }}
@@ -90,6 +99,11 @@ export default function App() {
           name="Location"
           options={{ headerShown: false }}
           component={LocationScreen}
+        />
+        <Drawer.Screen
+          name="Message"
+          options={{ headerShown: false }}
+          component={MessageScreen}
         />
         <Drawer.Screen name="News" component={NewsScreen} />
         <Drawer.Screen name="Services" component={ServicesScreen} />
@@ -102,3 +116,5 @@ export default function App() {
     </NavigationContainer>
   ) : null;
 }
+
+export default AppWrapper;

@@ -15,8 +15,23 @@ import timing from "../../../assets/timing.png";
 import about from "../../../assets/about.png";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import home from "../../../assets/home.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/core";
+import { setCurrentUser } from "../../redux/actions/user.action";
 
 const CustomDrawer = (props) => {
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(setCurrentUser(null));
+    navigation.navigate("Message", {
+      title: "Logged Out!",
+      message: "You are now using as GUEST.",
+    });
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={drawerStyles.top}>
@@ -32,7 +47,7 @@ const CustomDrawer = (props) => {
             variant="h3"
             numberOfLines={1}
           >
-            PPCC - BATKHELA EXTRA
+            {currentUser ? currentUser.UserName : "GUEST"}
           </AppText>
         </View>
       </View>
@@ -109,21 +124,26 @@ const CustomDrawer = (props) => {
         </View>
       </DrawerContentScrollView>
 
-      <View style={drawerStyles.bottom}>
-        <Icon
-          name="logout"
-          size={40}
-          color="white"
-          style={
-            {
-              // marginHorizontal: 20,
+      <TouchableOpacity
+        onPress={currentUser ? logout : () => navigation.navigate("LogIn")}
+        style={drawerStyles.bottomContainer}
+      >
+        <View style={drawerStyles.bottom}>
+          <Icon
+            name="logout"
+            size={40}
+            color="white"
+            style={
+              {
+                // marginHorizontal: 20,
+              }
             }
-          }
-        />
-        <AppText color="white" variant="h6" font="Poppins">
-          Log Out
-        </AppText>
-      </View>
+          />
+          <AppText color="white" variant="h6" font="Poppins">
+            {currentUser ? "LOG OUT" : "LOG IN"}
+          </AppText>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

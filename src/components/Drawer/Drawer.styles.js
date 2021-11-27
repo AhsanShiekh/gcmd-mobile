@@ -44,14 +44,21 @@ export const drawerStyles = StyleSheet.create({
     width: 45,
     marginHorizontal: 20,
   },
-  bottom: {
+  bottomContainer: {
     height: 70,
     width: "100%",
     backgroundColor: colors.main,
     position: "absolute",
     bottom: 0,
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+  },
+  bottom: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
 });

@@ -7,7 +7,7 @@ const today = new Date();
 const currentDate =
   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
-const AppDatePicker = () => {
+const AppDatePicker = ({ value, onChange }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [date, setDate] = useState(currentDate);
 
@@ -25,7 +25,7 @@ const AppDatePicker = () => {
     setShowDatePicker(false);
 
     // The parameter 'date' is a Date object so that you can use any Date prototype method.
-    setDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+    onChange(date);
   };
 
   return (
@@ -42,7 +42,7 @@ const AppDatePicker = () => {
             borderRadius: 8,
           }}
         >
-          <AppText variant="h6">{date}</AppText>
+          <AppText variant="h6">{value}</AppText>
         </View>
       </TouchableOpacity>
       <DatePicker

@@ -5,59 +5,43 @@ import AppText from "../AppText/AppText";
 import { reportCardStyles } from "./ReportCard.styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const ReportCard = () => {
+const ReportCard = ({ data }) => {
   return (
     <View style={reportCardStyles.root}>
       <View style={reportCardStyles.top}>
         <AppText variant="subtitle" font="Poppins" weight="bold">
-          LSO211104135
+          {data.PatientNo}
         </AppText>
-        <AppText variant="subtitle" font="Poppins" weight="bold">
+        {/* <AppText variant="subtitle" font="Poppins" weight="bold">
           NVC0245
-        </AppText>
+        </AppText> */}
       </View>
       <View style={reportCardStyles.line} />
       <View style={reportCardStyles.middleContent}>
         <View style={reportCardStyles.middleTop}>
           <AppText variant="subtitle" font="Poppins" weight="bold">
-            MUHAMMAD AHSAN
-          </AppText>
-          <AppText variant="subtitle" font="Poppins" weight="bold">
-            EJ1014793
+            {data.PatientName}
           </AppText>
         </View>
         <View style={reportCardStyles.tests}>
-          <View style={reportCardStyles.test}>
-            <AppText variant="subtitle" font="Poppins" weight="bold">
-              COVID-19 RNA BY PCR (FOR AIR BLUE)
-            </AppText>
-            <Icon name="file-download-done" size={22} color="#199819" />
-          </View>
-          <View style={reportCardStyles.test}>
-            <AppText variant="subtitle" font="Poppins" weight="bold">
-              SPIKE ANTIBODY
-            </AppText>
-            <Icon name="file-download-done" size={22} color="#199819" />
-          </View>
-          <View style={reportCardStyles.test}>
-            <AppText variant="subtitle" font="Poppins" weight="bold">
-              COVID IgM
-            </AppText>
-            <Icon name="loop" size={22} color="#FFC61B" />
-          </View>
+          {data.PatientOrderDetails.map((test, i) => (
+            <View style={reportCardStyles.test} key={i}>
+              <AppText variant="subtitle" font="Poppins" weight="bold">
+                {test.ServiceName}
+              </AppText>
+              <Icon
+                name={
+                  test.Status === "Reverfied" ? "file-download-done" : "loop"
+                }
+                size={22}
+                color={test.Status === "Reverfied" ? "#199819" : "#EFBA19"}
+              />
+            </View>
+          ))}
         </View>
         <View style={reportCardStyles.middleDown}>
           <AppText variant="subtitle" font="Poppins" weight="bold">
-            23-11-2021
-          </AppText>
-          <AppText
-            style={{ alignSelf: "flex-end" }}
-            variant="subtitle"
-            font="Poppins"
-            weight="bold"
-            numberOfLines={1}
-          >
-            ALI HAIDER
+            {data.CreatedOn}
           </AppText>
         </View>
       </View>

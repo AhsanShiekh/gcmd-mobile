@@ -1,29 +1,38 @@
-import React, {useState} from 'react'
-import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import {Icon} from "react-native-vector-icons/MaterialIcons";
-import { AppInputStyles } from './AppInput.styles';
-import { colors } from '../../utils/colors';
+import React, { useState } from "react";
+import { View, Text } from "react-native";
+import { TextInput } from "react-native-paper";
+import { Icon } from "react-native-vector-icons/MaterialIcons";
+import { AppInputStyles } from "./AppInput.styles";
+import { colors } from "../../utils/colors";
+import { Value } from "react-native-reanimated";
 
-const AppInput = ({password, label, onChange}) => {
+const AppInput = ({ password, label, onChange, error, value }) => {
+  const [showPassword, setShowPassword] = useState(false);
 
-    const [showPassword, setShowPassword] = useState(false)
-
-    return (
+  return (
     <TextInput
-        label={label}
-        onChange={onChange}
-        secureTextEntry={!showPassword && password ? true : false}
-        style={AppInputStyles.root}
-        right={ password ? <TextInput.Icon onPress={() => setShowPassword(!showPassword)} name={showPassword ? "eye-off" : "eye"} /> : null}
-        placeholderTextColor={colors.main}
-        selectionColor={colors.main}
-        activeOutlineColor={colors.main}
-        activeUnderlineColor={colors.main}
-        outlineColor="black"
-        underlineColor="black"
-      />
-    )
-}
+      label={label}
+      onChangeText={onChange}
+      secureTextEntry={!showPassword && password ? true : false}
+      style={AppInputStyles.root}
+      right={
+        password ? (
+          <TextInput.Icon
+            onPress={() => setShowPassword(!showPassword)}
+            name={showPassword ? "eye-off" : "eye"}
+          />
+        ) : null
+      }
+      placeholderTextColor={colors.main}
+      selectionColor={colors.main}
+      activeOutlineColor={colors.main}
+      activeUnderlineColor={colors.main}
+      outlineColor="black"
+      underlineColor="black"
+      error={error}
+      value={value}
+    />
+  );
+};
 
 export default AppInput;

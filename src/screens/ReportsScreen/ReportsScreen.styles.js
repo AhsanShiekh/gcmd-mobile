@@ -59,4 +59,20 @@ export const reportScreenStyles = StyleSheet.create({
     marginHorizontal: "2.5%",
     marginTop: 8,
   },
+  loaderContainer: {
+    flex: 1,
+    width: "95%",
+    zIndex: 2,
+    marginHorizontal: "2.5%",
+  },
+  loader: {
+    height: 200,
+    width: 200,
+  },
+  noReports: {
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
 });
