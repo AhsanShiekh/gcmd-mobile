@@ -30,6 +30,10 @@ export const getReports = async (
   }
 };
 
+export const getPDF = async (id) => {
+  return;
+};
+
 /*Object {
         "Age": "15 Year(s)",
         "CNIC": "",

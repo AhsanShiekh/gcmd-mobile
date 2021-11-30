@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { createStackNavigator } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import ReportsScreen from "./src/screens/ReportsScreen/ReportsScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
-import NewsScreen from "./src/screens/NewsScreen/NewsScreen";
-import ServicesScreen from "./src/screens/ServicesScreen/ServicesScreen";
-import DoctorsScreen from "./src/screens/DoctorsScreen/DoctorsScreen";
-import CertificatesScreen from "./src/screens/CertificatesScreen/CertificatesScreen";
-import FeedbackScreen from "./src/screens/FeedbackScreen/Feedback";
 import LocationScreen from "./src/screens/LocationScreen/LocationScreen";
-import TimingScreen from "./src/screens/TimingScreen/TimingScreen";
-import AboutScreen from "./src/screens/AboutScreen/AboutScreen";
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import CustomDrawer from "./src/components/Drawer/Drawer";
 import { Provider, useSelector } from "react-redux";
 import store from "./src/redux/store";
 import MessageScreen from "./src/screens/MessageScreen/MessageScreen";
+import ReportScreen from "./src/screens/ReportScreen/ReportScreen";
+import ComingSoonScreen from "./src/screens/ComingSoonScreen/ComingSoonScreen";
 
 const AppWrapper = () => (
   <Provider store={store}>
@@ -46,38 +40,13 @@ function App() {
     loadFonts();
   }, []);
 
-  const options = {
-    animations: {
-      setRoot: {
-        enter: {
-          waitForRender: true,
-          enabled: false,
-          translationY: {
-            from: 0,
-            to: 1,
-            duration: 3,
-          },
-        },
-        exit: {
-          waitForRender: true,
-          enabled: false,
-          translationY: {
-            from: 1,
-            to: 0,
-            duration: 3,
-          },
-        },
-      },
-    },
-  };
-
   return fontLoaded ? (
     <NavigationContainer>
       <Drawer.Navigator
         drawerContent={({ navigation }) => (
           <CustomDrawer navigation={navigation} />
         )}
-        screenOptions={options}
+        screenOptions={{ unmountInactiveRoutes: true }}
         initialRouteName="Welcome"
       >
         <Drawer.Screen
@@ -87,7 +56,7 @@ function App() {
         />
         <Drawer.Screen
           name="Reports"
-          options={{ headerShown: false }}
+          options={{ headerShown: false, unmountOnBlur: true }}
           component={currentUser ? ReportsScreen : LoginScreen}
         />
         <Drawer.Screen
@@ -105,13 +74,60 @@ function App() {
           options={{ headerShown: false }}
           component={MessageScreen}
         />
-        <Drawer.Screen name="News" component={NewsScreen} />
-        <Drawer.Screen name="Services" component={ServicesScreen} />
-        <Drawer.Screen name="Doctors" component={DoctorsScreen} />
-        <Drawer.Screen name="Certificates" component={CertificatesScreen} />
-        <Drawer.Screen name="Feedback" component={FeedbackScreen} />
-        <Drawer.Screen name="Timings" component={TimingScreen} />
-        <Drawer.Screen name="About" component={AboutScreen} />
+        <Drawer.Screen
+          name="Report"
+          options={{ headerShown: false, unmountOnBlur: true }}
+          component={ReportScreen}
+        />
+        <Drawer.Screen
+          name="Doctors"
+          component={({ navigation }) => (
+            <ComingSoonScreen navigation={navigation} title="doctors" />
+          )}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="News"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="News" navigation={navigation} />
+          )}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="Services"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="services" navigation={navigation} />
+          )}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="Certificates"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="Certificates" navigation={navigation} />
+          )}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="Feedback"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="Feedback" navigation={navigation} />
+          )}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="Timings"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="Timing" navigation={navigation} />
+          )}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="About"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="Feedback" navigation={navigation} />
+          )}
+          options={{ headerShown: false }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   ) : null;

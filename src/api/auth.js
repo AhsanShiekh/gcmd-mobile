@@ -12,19 +12,19 @@ const getLoginUrl = (s, username, password) => {
 };
 
 export const logIn = async (username, password) => {
-  const res81 = await axios.get(getLoginUrl("81", username, password));
-  if (res81.data.Status) {
-    return {
-      ...res81.data,
-      software: "81",
-    };
-  }
-
   const res82 = await axios.get(getLoginUrl("82", username, password));
   if (res82.data.Status) {
     return {
       ...res82.data,
       software: "82",
+    };
+  }
+
+  const res81 = await axios.get(getLoginUrl("81", username, password));
+  if (res81.data.Status) {
+    return {
+      ...res81.data,
+      software: "81",
     };
   }
 

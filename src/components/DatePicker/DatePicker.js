@@ -35,14 +35,15 @@ const AppDatePicker = ({ value, onChange }) => {
           style={{
             backgroundColor: "white",
             color: "black",
-            height: 33,
+            height: 27,
             justifyContent: "center",
             alignItems: "center",
-            width: "100%",
+            width: "85%",
             borderRadius: 8,
+            marginHorizontal: "7.5%",
           }}
         >
-          <AppText variant="h6">{value}</AppText>
+          <AppText variant="subtitle">{value}</AppText>
         </View>
       </TouchableOpacity>
       <DatePicker

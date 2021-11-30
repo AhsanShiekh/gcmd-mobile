@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { colors } from "../../utils/colors";
 import AppText from "../AppText/AppText";
 import { reportCardStyles } from "./ReportCard.styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/core";
 
 const ReportCard = ({ data }) => {
+  const [pending, setPending] = useState(0);
+  const [allPending, setAllPending] = useState(false);
+  const navigation = useNavigation();
+
+  const status = () => {
+    const pendingResults = data.PatientOrderDetails.filter(
+      (test) => test.Status !== "Reverfied"
+    );
+    setAllPending(
+      pendingResults.length === data.PatientOrderDetails.length ? true : false
+    );
+  };
+
+  useEffect(() => {
+    status();
+
+    return () => setPending(0);
+  }, [data]);
+
   return (
     <View style={reportCardStyles.root}>
       <View style={reportCardStyles.top}>
         <AppText variant="subtitle" font="Poppins" weight="bold">
-          {data.PatientNo}
+          {data.PatientOrderNo}
         </AppText>
         {/* <AppText variant="subtitle" font="Poppins" weight="bold">
           NVC0245
@@ -47,9 +68,30 @@ const ReportCard = ({ data }) => {
       </View>
       <View style={reportCardStyles.line} />
       <View style={reportCardStyles.bottom}>
-        <AppText variant="h6" color={colors.main} font="Poppins" weight="bold">
-          VIEW VERIFIED RESULTS
-        </AppText>
+        <TouchableOpacity
+          onPress={
+            !allPending
+              ? () =>
+                  navigation.navigate("Report", {
+                    id: data.PatientOrderId,
+                    name: data.PatientName,
+                  })
+              : null
+          }
+        >
+          <AppText
+            variant="h6"
+            color={allPending ? "#EFBA19" : colors.main}
+            font="Poppins"
+            weight="bold"
+          >
+            {allPending
+              ? "PENDING"
+              : pending === 0
+              ? "VIEW REPORT"
+              : "VIEW VERIFIED RESULTS"}
+          </AppText>
+        </TouchableOpacity>
       </View>
     </View>
   );

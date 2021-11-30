@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, ScrollView, Image } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { reportScreenStyles } from "./ReportsScreen.styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AppText from "../../components/AppText/AppText";
@@ -11,6 +17,7 @@ import AnimatedLoader from "react-native-animated-loader";
 import { getReports } from "../../api/reports";
 import { setReports } from "../../redux/actions/reports.actions";
 import notFound from "../../../assets/not-found.png";
+import { useIsFocused } from "@react-navigation/core";
 
 const today = new Date();
 const currentDate =
@@ -20,10 +27,13 @@ const ReportsScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [fromDate, setFromDate] = useState(currentDate);
   const [toDate, settoDate] = useState(currentDate);
+  const [AppReports, setAppReports] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const currentReports = useSelector((state) => state.reports.reports);
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
   const getData = async () => {
     setLoading(true);
@@ -35,12 +45,37 @@ const ReportsScreen = ({ navigation }) => {
       toDate
     );
     dispatch(setReports(reports.Data.PatientOrders));
+    setAppReports(reports.Data.PatientOrders);
     setLoading(false);
   };
 
+  const search = (text) => {
+    if (text === "") {
+      setAppReports(currentReports);
+      setSearchLoading(false);
+      return;
+    }
+
+    setSearchLoading(true);
+    const filteredReports = currentReports.filter(
+      (report) =>
+        report.PatientName.toLowerCase().includes(text.toLowerCase()) ||
+        report.PatientOrderNo.toString()
+          .toLowerCase()
+          .includes(text.toLowerCase()) ||
+        report.PatientOrderDetails[0].ServiceName.toLowerCase().includes(
+          text.toLowerCase()
+        )
+    );
+    setAppReports(filteredReports);
+    setSearchLoading(false);
+  };
+
   useEffect(() => {
-    getData();
-  }, []);
+    if (isFocused) {
+      getData();
+    }
+  }, [isFocused]);
 
   return (
     <View style={reportScreenStyles.root}>
@@ -48,19 +83,24 @@ const ReportsScreen = ({ navigation }) => {
         <View style={reportScreenStyles.header}>
           <Icon
             name="arrow-back"
-            size={30}
+            size={25}
             color="white"
             style={{ marginLeft: 20, marginRight: 10, marginBottom: 5 }}
             onPress={() => navigation.goBack()}
           />
-          <AppText variant="h4" color="white" font="Poppins">
+          <AppText variant="h5" color="white" font="Poppins">
             REPORTS
           </AppText>
         </View>
         <View style={reportScreenStyles.topContent}>
           <View style={reportScreenStyles.dates}>
             <View style={reportScreenStyles.date}>
-              <AppText variant="h6" color="lightgrey" font="Poppins" center>
+              <AppText
+                variant="subtitle"
+                color="lightgrey"
+                font="Poppins"
+                center
+              >
                 FROM
               </AppText>
               <AppDatePicker
@@ -75,7 +115,12 @@ const ReportsScreen = ({ navigation }) => {
               />
             </View>
             <View style={reportScreenStyles.date}>
-              <AppText variant="h6" color="lightgrey" font="Poppins" center>
+              <AppText
+                variant="subtitle"
+                color="lightgrey"
+                font="Poppins"
+                center
+              >
                 TO
               </AppText>
               <AppDatePicker
@@ -102,6 +147,7 @@ const ReportsScreen = ({ navigation }) => {
                 width: "40%",
                 marginHorizontal: "30%",
                 borderRadius: 8,
+                marginTop: 15,
               }}
             >
               <AppText variant="h6" color="white" font="Poppins">
@@ -113,21 +159,40 @@ const ReportsScreen = ({ navigation }) => {
       </View>
 
       <View style={reportScreenStyles.searchContainer}>
-        <Icon
-          style={{ marginHorizontal: 8 }}
-          name="search"
-          size={25}
-          color="#808080"
+        {!searchLoading ? (
+          <Icon
+            style={{ marginHorizontal: 8 }}
+            name="search"
+            size={25}
+            color="#808080"
+          />
+        ) : (
+          <ActivityIndicator
+            size="small"
+            color="#808080"
+            style={{ marginHorizontal: 8 }}
+          />
+        )}
+        <TextInput
+          onChangeText={search}
+          style={reportScreenStyles.search}
+          placeholder="Search..."
         />
-        <TextInput style={reportScreenStyles.search} placeholder="Search..." />
       </View>
+
+      <AppText
+        variant="subtitle"
+        color="#808080"
+        center
+        style={{ marginVertical: 5 }}
+      >
+        {AppReports.length} Results
+      </AppText>
 
       {!loading ? (
         <ScrollView style={reportScreenStyles.reportsContainer}>
-          {currentReports.length ? (
-            currentReports.map((report, i) => (
-              <ReportCard data={report} key={i} />
-            ))
+          {AppReports.length ? (
+            AppReports.map((report, i) => <ReportCard data={report} key={i} />)
           ) : (
             <View style={reportScreenStyles.noReports}>
               <Image source={notFound} style={{ height: 200, width: 200 }} />

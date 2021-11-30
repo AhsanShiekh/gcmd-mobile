@@ -29,14 +29,14 @@ export const reportCardStyles = StyleSheet.create({
   },
   middleDown: {
     width: "100%",
-    marginBottom: 12,
+    marginBottom: 8,
   },
   tests: {
     width: "100%",
-    marginVertical: 12,
+    marginVertical: 2,
   },
   middleTop: {
-    marginTop: 12,
+    marginTop: 8,
   },
   bottom: {
     height: 40,

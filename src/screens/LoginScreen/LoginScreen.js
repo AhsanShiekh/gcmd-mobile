@@ -44,6 +44,13 @@ const LoginScreen = () => {
       setError(true);
       return;
     }
+
+    if (!user.Data.PatientId && !user.Data.PartyLocationId) {
+      console.log("here");
+      setError(true);
+      return;
+    }
+
     setError(false);
     dispatch(setCurrentUser({ ...user.Data, software: user.software }));
 

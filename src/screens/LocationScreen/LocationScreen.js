@@ -22,10 +22,10 @@ const LocationScreen = () => {
       <MapView
         style={locationScreenStyles.map}
         region={{
-          longitude: 74.26995302476377,
-          latitude: 31.454618987666365,
-          longitudeDelta: 0.02,
-          latitudeDelta: 0.02,
+          longitude: 74.26908,
+          latitude: 31.45403,
+          longitudeDelta: 0.01,
+          latitudeDelta: 0.01,
         }}
       >
         <Marker title="GENOME CENTER LAHORE" coordinate={regions}></Marker>

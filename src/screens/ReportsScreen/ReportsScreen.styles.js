@@ -7,7 +7,7 @@ export const reportScreenStyles = StyleSheet.create({
     backgroundColor: "#F3F0F0",
   },
   top: {
-    height: "30%",
+    height: "23%",
     width: "100%",
     backgroundColor: colors.main,
     borderBottomLeftRadius: 28,
@@ -25,7 +25,6 @@ export const reportScreenStyles = StyleSheet.create({
     height: "80%",
   },
   dates: {
-    height: "50%",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -36,7 +35,7 @@ export const reportScreenStyles = StyleSheet.create({
     textAlign: "center",
   },
   searchContainer: {
-    height: 52,
+    height: 40,
     width: "95%",
     borderWidth: 2,
     borderColor: "#808080",
