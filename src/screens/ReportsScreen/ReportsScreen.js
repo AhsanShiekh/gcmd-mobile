@@ -29,11 +29,11 @@ const ReportsScreen = ({ navigation }) => {
   const [toDate, settoDate] = useState(currentDate);
   const [AppReports, setAppReports] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [searchContent, setSearchContent] = useState("");
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const currentReports = useSelector((state) => state.reports.reports);
   const dispatch = useDispatch();
-  const isFocused = useIsFocused();
 
   const getData = async () => {
     setLoading(true);
@@ -72,10 +72,15 @@ const ReportsScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (isFocused) {
-      getData();
-    }
-  }, [isFocused]);
+    getData();
+  }, []);
+
+  const refresh = () => {
+    settoDate(currentDate);
+    setFromDate(currentDate);
+    setSearchContent("");
+    getData();
+  };
 
   return (
     <View style={reportScreenStyles.root}>
@@ -99,6 +104,7 @@ const ReportsScreen = ({ navigation }) => {
                 variant="subtitle"
                 color="lightgrey"
                 font="Poppins"
+                weight="bold"
                 center
               >
                 FROM
@@ -119,6 +125,7 @@ const ReportsScreen = ({ navigation }) => {
                 variant="subtitle"
                 color="lightgrey"
                 font="Poppins"
+                weight="bold"
                 center
               >
                 TO
@@ -150,7 +157,7 @@ const ReportsScreen = ({ navigation }) => {
                 marginTop: 15,
               }}
             >
-              <AppText variant="h6" color="white" font="Poppins">
+              <AppText variant="h6" color="white" font="Poppins" weight="bold">
                 LOAD
               </AppText>
             </View>
@@ -158,36 +165,58 @@ const ReportsScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={reportScreenStyles.searchContainer}>
-        {!searchLoading ? (
-          <Icon
-            style={{ marginHorizontal: 8 }}
-            name="search"
-            size={25}
-            color="#808080"
+      <View style={reportScreenStyles.searchSection}>
+        <View style={reportScreenStyles.searchContainer}>
+          {!searchLoading ? (
+            <Icon
+              style={{ marginHorizontal: 8 }}
+              name="search"
+              size={25}
+              color="#808080"
+            />
+          ) : (
+            <ActivityIndicator
+              size="small"
+              color="#808080"
+              style={{ marginHorizontal: 8 }}
+            />
+          )}
+          <TextInput
+            onChangeText={(text) => {
+              setSearchContent(text);
+              search(text);
+            }}
+            style={reportScreenStyles.search}
+            placeholder="Search..."
+            value={searchContent}
           />
-        ) : (
-          <ActivityIndicator
-            size="small"
-            color="#808080"
-            style={{ marginHorizontal: 8 }}
-          />
-        )}
-        <TextInput
-          onChangeText={search}
-          style={reportScreenStyles.search}
-          placeholder="Search..."
-        />
+        </View>
+
+        <Icon name="refresh" color="#808080" size={35} onPress={refresh} />
       </View>
 
-      <AppText
-        variant="subtitle"
-        color="#808080"
-        center
-        style={{ marginVertical: 5 }}
-      >
-        {AppReports.length} Results
-      </AppText>
+      <View style={reportScreenStyles.resultsCounter}>
+        <View style={reportScreenStyles.descriptiom}>
+          <Icon name="file-download-done" color="#199819" size={22} />
+          <AppText variant="subtitle" color="#199819">
+            READY
+          </AppText>
+        </View>
+        <AppText
+          variant="subtitle"
+          color="#808080"
+          center
+          style={{ marginVertical: 5 }}
+        >
+          {AppReports.length} Results
+        </AppText>
+        <View style={reportScreenStyles.descriptiom}>
+          <Icon name="loop" color="#EFBA19" size={22} />
+          <AppText variant="subtitle" color="#EFBA19">
+            TEST IN PROCESS
+          </AppText>
+        </View>
+      </View>
 
       {!loading ? (
         <ScrollView style={reportScreenStyles.reportsContainer}>

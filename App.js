@@ -56,7 +56,7 @@ function App() {
         />
         <Drawer.Screen
           name="Reports"
-          options={{ headerShown: false, unmountOnBlur: true }}
+          options={{ headerShown: false }}
           component={currentUser ? ReportsScreen : LoginScreen}
         />
         <Drawer.Screen

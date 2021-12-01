@@ -30,12 +30,14 @@ const ReportCard = ({ data }) => {
   return (
     <View style={reportCardStyles.root}>
       <View style={reportCardStyles.top}>
-        <AppText variant="subtitle" font="Poppins" weight="bold">
+        <AppText variant="subtitle" font="Poppins">
           {data.PatientOrderNo}
         </AppText>
-        {/* <AppText variant="subtitle" font="Poppins" weight="bold">
-          NVC0245
-        </AppText> */}
+        {data.LabNo && (
+          <AppText variant="subtitle" font="Poppins">
+            {data.LabNo}
+          </AppText>
+        )}
       </View>
       <View style={reportCardStyles.line} />
       <View style={reportCardStyles.middleContent}>
@@ -47,7 +49,7 @@ const ReportCard = ({ data }) => {
         <View style={reportCardStyles.tests}>
           {data.PatientOrderDetails.map((test, i) => (
             <View style={reportCardStyles.test} key={i}>
-              <AppText variant="subtitle" font="Poppins" weight="bold">
+              <AppText variant="subtitle" font="Poppins">
                 {test.ServiceName}
               </AppText>
               <Icon
@@ -61,7 +63,7 @@ const ReportCard = ({ data }) => {
           ))}
         </View>
         <View style={reportCardStyles.middleDown}>
-          <AppText variant="subtitle" font="Poppins" weight="bold">
+          <AppText variant="subtitle" font="Poppins">
             {data.CreatedOn}
           </AppText>
         </View>
@@ -83,10 +85,9 @@ const ReportCard = ({ data }) => {
             variant="h6"
             color={allPending ? "#EFBA19" : colors.main}
             font="Poppins"
-            weight="bold"
           >
             {allPending
-              ? "PENDING"
+              ? "TEST IN PROCESS"
               : pending === 0
               ? "VIEW REPORT"
               : "VIEW VERIFIED RESULTS"}

@@ -4,26 +4,42 @@ import {
   TouchableWithoutFeedback,
   Linking,
   ActivityIndicator,
+  BackHandler,
 } from "react-native";
 import reportScreenStyles from "./ReportScreen.style";
 import AppText from "../../components/AppText/AppText";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/FontAwesome";
 import PdfReader from "rn-pdf-reader-js";
 import * as Sharing from "expo-sharing";
 import * as FileSystem from "expo-file-system";
+import { useFocusEffect } from "@react-navigation/core";
 
-const ReportScreen = ({ route }) => {
+const ReportScreen = ({ route, navigation }) => {
   const [loading, showLoading] = useState(false);
   const [shareLoading, setShareLoading] = useState(false);
   const PDFURL = `http://eerp.genomelabs.com.pk/print/GetReport/${route.params.id}`;
 
   useEffect(() => {
-    showLoading(!loading);
+    showLoading(true);
   }, [route]);
 
   const downloadFile = () => {
     Linking.openURL(PDFURL);
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate("Reports");
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
 
   const share = () => {
     setShareLoading(true);
@@ -42,6 +58,28 @@ const ReportScreen = ({ route }) => {
 
   return (
     <View style={reportScreenStyles.root}>
+      {!loading ? (
+        <View style={reportScreenStyles.bottom}>
+          <TouchableWithoutFeedback onPress={downloadFile}>
+            <View style={reportScreenStyles.download}>
+              <Icon name="download" size={20} color="white" />
+              <AppText color="white" variant="subtitle" font="Raleway">
+                DOWNLOAD
+              </AppText>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={share}>
+            <View style={reportScreenStyles.share}>
+              <Icon name="share" size={20} color="white" />
+              <AppText color="white" variant="subtitle" font="Raleway">
+                SHARE
+              </AppText>
+              {shareLoading && <ActivityIndicator size="small" color="white" />}
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+      ) : null}
+
       <View style={reportScreenStyles.pdf}>
         <PdfReader
           onLoad={() => {
@@ -52,10 +90,17 @@ const ReportScreen = ({ route }) => {
           source={{
             uri: PDFURL,
           }}
-          style={{
-            height: "100%",
-            width: "100%",
-            backgroundColor: "lightgrey",
+          customStyle={{
+            readerContainer: { backgroundColor: "#F3F0F0" },
+            readerContainerDocument: {
+              backgroundColor: "#F3F0F0",
+              height: "100%",
+            },
+            readerContainerZoomContainer: { display: "none" },
+            readerContainerNavigate: {
+              backgroundColor: "#F3F0F0",
+            },
+            readerContainerNavigateArrow: { color: "#F3F0F0" },
           }}
         />
         {loading ? (
@@ -74,27 +119,6 @@ const ReportScreen = ({ route }) => {
           </View>
         ) : null}
       </View>
-      {!loading ? (
-        <View style={reportScreenStyles.bottom}>
-          <TouchableWithoutFeedback onPress={downloadFile}>
-            <View style={reportScreenStyles.download}>
-              <Icon name="save" size={35} color="white" />
-              <AppText color="white" variant="h5" font="Raleway">
-                DOWNLOAD
-              </AppText>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={share}>
-            <View style={reportScreenStyles.share}>
-              <Icon name="share" size={35} color="white" />
-              <AppText color="white" variant="h5" font="Raleway">
-                SHARE
-              </AppText>
-              {shareLoading && <ActivityIndicator size="small" color="white" />}
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-      ) : null}
     </View>
   );
 };

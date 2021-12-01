@@ -34,12 +34,19 @@ export const reportScreenStyles = StyleSheet.create({
     width: "40%",
     textAlign: "center",
   },
-  searchContainer: {
+  searchSection: {
     height: 40,
     width: "95%",
+    marginHorizontal: "2.5%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  searchContainer: {
+    height: "100%",
+    width: "90%",
     borderWidth: 2,
     borderColor: "#808080",
-    marginHorizontal: "2.5%",
     marginTop: 7,
     borderRadius: 10,
     flexDirection: "row",
@@ -73,5 +80,18 @@ export const reportScreenStyles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: "white",
+  },
+  resultsCounter: {
+    height: 40,
+    width: "95%",
+    marginHorizontal: "2.5%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  descriptiom: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
 });
