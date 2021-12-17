@@ -43,7 +43,8 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "rn-pdf-reader-js": "^4.1.1",
-    "expo-sharing": "~10.0.3"
+    "expo-sharing": "~10.0.3",
+    "@react-native-async-storage/async-storage": "~1.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

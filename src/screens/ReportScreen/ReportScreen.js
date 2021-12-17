@@ -13,14 +13,31 @@ import PdfReader from "rn-pdf-reader-js";
 import * as Sharing from "expo-sharing";
 import * as FileSystem from "expo-file-system";
 import { useFocusEffect } from "@react-navigation/core";
+import { useSelector } from "react-redux";
 
 const ReportScreen = ({ route, navigation }) => {
   const [loading, showLoading] = useState(false);
   const [shareLoading, setShareLoading] = useState(false);
-  const PDFURL = `http://eerp.genomelabs.com.pk/print/GetReport/${route.params.id}`;
+  const [fileUri, setFileUri] = useState("");
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const PDFURL =
+    currentUser.software === "81"
+      ? `http://erp.genomelabs.com.pk:91/print/GetReport/${route.params.id}`
+      : `http://eerp.genomelabs.com.pk/print/GetReport/${route.params.id}`;
 
   useEffect(() => {
     showLoading(true);
+    let fileUri =
+      FileSystem.documentDirectory + `${route.params.name}_report.pdf`;
+    FileSystem.downloadAsync(PDFURL, fileUri)
+      .then(({ uri }) => {
+        setFileUri(uri);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [route]);
 
   const downloadFile = () => {
@@ -42,18 +59,7 @@ const ReportScreen = ({ route, navigation }) => {
   );
 
   const share = () => {
-    setShareLoading(true);
-    let fileUri =
-      FileSystem.documentDirectory + `${route.params.name}_report.pdf`;
-    FileSystem.downloadAsync(PDFURL, fileUri)
-      .then(({ uri }) => {
-        Sharing.shareAsync(uri);
-        setShareLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setShareLoading(false);
-      });
+    Sharing.shareAsync(fileUri);
   };
 
   return (

@@ -30,19 +30,21 @@ const ReportsScreen = ({ navigation }) => {
   const [AppReports, setAppReports] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchContent, setSearchContent] = useState("");
+  const [counter, setCounter] = useState(0);
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const currentReports = useSelector((state) => state.reports.reports);
   const dispatch = useDispatch();
+  const IsFocused = useIsFocused();
 
-  const getData = async () => {
+  const getData = async (CFromData, CToDate) => {
     setLoading(true);
     const reports = await getReports(
       currentUser.software,
       currentUser.PatientId,
       currentUser.PartyLocationId,
-      fromDate,
-      toDate
+      CFromData || fromDate,
+      CToDate || toDate
     );
     dispatch(setReports(reports.Data.PatientOrders));
     setAppReports(reports.Data.PatientOrders);
@@ -72,14 +74,17 @@ const ReportsScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (IsFocused && counter === 0) {
+      getData();
+      setCounter((coun) => coun + 1);
+    }
+  });
 
   const refresh = () => {
     settoDate(currentDate);
     setFromDate(currentDate);
     setSearchContent("");
-    getData();
+    getData(currentDate, currentDate);
   };
 
   return (

@@ -8,9 +8,13 @@ export const WelcomeScreenStyles = StyleSheet.create({
   title: {
     alignSelf: "center",
     marginLeft: 25,
-    marginTop: 0,
     lineHeight: 50,
     marginTop: 15,
+  },
+  title2: {
+    alignSelf: "center",
+    marginTop: 0,
+    lineHeight: 50,
   },
   top: {
     height: "35%",

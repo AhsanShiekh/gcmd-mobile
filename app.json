@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "genome-center-mobile",
+    "name": "Genome Center",
     "slug": "genome-center-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,15 +13,17 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.genomelabs.genomecenter",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.genomelabs.genomecenter",
+      "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan"
@@ -29,6 +31,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Official Mobile app for Genome Center for Molecular based diagnostics and research"
   }
 }

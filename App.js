@@ -7,11 +7,14 @@ import WelcomeScreen from "./src/screens/WelcomeScreen/WelcomeScreen";
 import LocationScreen from "./src/screens/LocationScreen/LocationScreen";
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import CustomDrawer from "./src/components/Drawer/Drawer";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./src/redux/store";
 import MessageScreen from "./src/screens/MessageScreen/MessageScreen";
 import ReportScreen from "./src/screens/ReportScreen/ReportScreen";
 import ComingSoonScreen from "./src/screens/ComingSoonScreen/ComingSoonScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setCurrentUser } from "./src/redux/actions/user.action";
+import AirlineScreen from "./src/screens/AirlinesScreen/AirlinesScreen";
 
 const AppWrapper = () => (
   <Provider store={store}>
@@ -22,6 +25,7 @@ const AppWrapper = () => (
 function App() {
   const [fontLoaded, setfontLoaded] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
 
   const Drawer = createDrawerNavigator();
 
@@ -36,8 +40,17 @@ function App() {
     setfontLoaded(true);
   };
 
+  const checkForUser = async () => {
+    const user = await AsyncStorage.getItem("user");
+    if (user) {
+      const userJson = JSON.parse(user);
+      dispatch(setCurrentUser(userJson));
+    }
+  };
+
   useEffect(() => {
     loadFonts();
+    checkForUser();
   }, []);
 
   return fontLoaded ? (
@@ -66,8 +79,10 @@ function App() {
         />
         <Drawer.Screen
           name="Location"
+          component={({ navigation }) => (
+            <ComingSoonScreen title="LOCATION" navigation={navigation} />
+          )}
           options={{ headerShown: false }}
-          component={LocationScreen}
         />
         <Drawer.Screen
           name="Message"
@@ -82,15 +97,13 @@ function App() {
         <Drawer.Screen
           name="Doctors"
           component={({ navigation }) => (
-            <ComingSoonScreen navigation={navigation} title="doctors" />
+            <ComingSoonScreen navigation={navigation} title="Doctors" />
           )}
           options={{ headerShown: false }}
         />
         <Drawer.Screen
-          name="News"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="News" navigation={navigation} />
-          )}
+          name="Airlines"
+          component={AirlineScreen}
           options={{ headerShown: false }}
         />
         <Drawer.Screen
@@ -124,7 +137,7 @@ function App() {
         <Drawer.Screen
           name="About"
           component={({ navigation }) => (
-            <ComingSoonScreen title="Feedback" navigation={navigation} />
+            <ComingSoonScreen title="About Us" navigation={navigation} />
           )}
           options={{ headerShown: false }}
         />

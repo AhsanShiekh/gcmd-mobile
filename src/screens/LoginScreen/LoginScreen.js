@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/actions/user.action";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../../utils/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -53,6 +54,10 @@ const LoginScreen = () => {
 
     setError(false);
     dispatch(setCurrentUser({ ...user.Data, software: user.software }));
+    await AsyncStorage.setItem(
+      "user",
+      JSON.stringify({ ...user.Data, software: user.software })
+    );
 
     navigation.navigate("Message", {
       message: `You are now Logged In as ${user.Data.UserName}`,

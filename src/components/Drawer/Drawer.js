@@ -18,14 +18,16 @@ import home from "../../../assets/home.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import { setCurrentUser } from "../../redux/actions/user.action";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CustomDrawer = (props) => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const logout = () => {
+  const logout = async () => {
     dispatch(setCurrentUser(null));
+    await AsyncStorage.removeItem("user");
     navigation.navigate("Message", {
       title: "Logged Out!",
       message: "You are now using as GUEST.",
