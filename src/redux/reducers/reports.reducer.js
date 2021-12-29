@@ -1,5 +1,6 @@
 const initialState = {
   reports: [],
+  tests: [],
 };
 
 const reportsReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const reportsReducer = (state = initialState, action) => {
       return {
         ...state,
         reports: action.payload,
+      };
+    case "SET_TESTS":
+      return {
+        ...state,
+        tests: action.payload,
       };
     default:
       return state;

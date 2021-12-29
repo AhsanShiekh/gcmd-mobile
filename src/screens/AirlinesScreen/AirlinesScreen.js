@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import AppText from "../../components/AppText/AppText";
 import { airlineScreenStyles } from "./AirlineScreen.styles";
 import { colors } from "../../utils/colors";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import airlinesImage from "../../../assets/aircraft.png";
 
 const airlines = [
-  "PAKISTAN INTERNATIONAL AIRINES (PIA)",
+  "PIA",
   "SALAM AIR",
   "SERENE AIR",
   "AIR ARABIA",
+  "AIR SIAL",
   "FLY DUBAI",
   "AIR BLUE",
   "TURKISH AIRLINE",
@@ -54,6 +56,7 @@ const AirlineScreen = () => {
   return (
     <View style={airlineScreenStyles.root}>
       <View style={airlineScreenStyles.top}>
+        <Image source={airlinesImage} style={airlineScreenStyles.image} />
         <AppText variant={"h2"} font="Poppins" color={colors.main}>
           APPROVED AIRLINES
         </AppText>
@@ -63,7 +66,7 @@ const AirlineScreen = () => {
           style={{ marginHorizontal: 8 }}
           name="search"
           size={25}
-          color="#808080"
+          color="black"
         />
         <TextInput
           onChangeText={(text) => {
@@ -76,7 +79,7 @@ const AirlineScreen = () => {
       <ScrollView contentContainerStyle={airlineScreenStyles.list}>
         {Airlines.map((name) => (
           <View style={airlineScreenStyles.item}>
-            <AppText center variant="h6" color="darkgrey" font="Poppins">
+            <AppText center variant="h6" color="black" font="Poppins">
               {name}
             </AppText>
           </View>

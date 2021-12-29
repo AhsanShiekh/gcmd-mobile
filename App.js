@@ -11,10 +11,15 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./src/redux/store";
 import MessageScreen from "./src/screens/MessageScreen/MessageScreen";
 import ReportScreen from "./src/screens/ReportScreen/ReportScreen";
-import ComingSoonScreen from "./src/screens/ComingSoonScreen/ComingSoonScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setCurrentUser } from "./src/redux/actions/user.action";
 import AirlineScreen from "./src/screens/AirlinesScreen/AirlinesScreen";
+import TimingScreen from "./src/screens/TimingScreen/TimingScreen";
+import DoctorsScreen from "./src/screens/DoctorsScreen/DoctorsScreen";
+import AboutScreen from "./src/screens/AboutScreen/AboutScreen";
+import CertificatesScreen from "./src/screens/CertificatesScreen/CertificatesScreen";
+import FeedbackScreen from "./src/screens/FeedbackScreen/Feedback";
+import ServicesScreen from "./src/screens/ServicesScreen/ServicesScreen";
 
 const AppWrapper = () => (
   <Provider store={store}>
@@ -73,15 +78,13 @@ function App() {
           component={currentUser ? ReportsScreen : LoginScreen}
         />
         <Drawer.Screen
-          options={{ headerShown: false }}
+          options={{ headerShown: false, unmountOnBlur: true }}
           name="LogIn"
           component={LoginScreen}
         />
         <Drawer.Screen
           name="Location"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="LOCATION" navigation={navigation} />
-          )}
+          component={LocationScreen}
           options={{ headerShown: false }}
         />
         <Drawer.Screen
@@ -96,9 +99,12 @@ function App() {
         />
         <Drawer.Screen
           name="Doctors"
-          component={({ navigation }) => (
-            <ComingSoonScreen navigation={navigation} title="Doctors" />
-          )}
+          component={DoctorsScreen}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="Timings"
+          component={TimingScreen}
           options={{ headerShown: false }}
         />
         <Drawer.Screen
@@ -107,38 +113,23 @@ function App() {
           options={{ headerShown: false }}
         />
         <Drawer.Screen
-          name="Services"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="services" navigation={navigation} />
-          )}
+          name="About"
+          component={AboutScreen}
           options={{ headerShown: false }}
         />
         <Drawer.Screen
           name="Certificates"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="Certificates" navigation={navigation} />
-          )}
+          component={CertificatesScreen}
           options={{ headerShown: false }}
         />
         <Drawer.Screen
           name="Feedback"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="Feedback" navigation={navigation} />
-          )}
-          options={{ headerShown: false }}
+          component={FeedbackScreen}
+          options={{ headerShown: false, unmountOnBlur: true }}
         />
         <Drawer.Screen
-          name="Timings"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="Timing" navigation={navigation} />
-          )}
-          options={{ headerShown: false }}
-        />
-        <Drawer.Screen
-          name="About"
-          component={({ navigation }) => (
-            <ComingSoonScreen title="About Us" navigation={navigation} />
-          )}
+          name="Services"
+          component={ServicesScreen}
           options={{ headerShown: false }}
         />
       </Drawer.Navigator>

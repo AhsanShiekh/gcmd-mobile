@@ -120,7 +120,9 @@ const ReportScreen = ({ route, navigation }) => {
           >
             <ActivityIndicator size="large" color="black" />
             <AppText variant="h6" center>
-              {`Loading ${route.params.name.split(" ")[0]}'s Report`}
+              {!currentUser.PatientId
+                ? `Loading ${route.params.name.split(" ")[0]}'s Report`
+                : "Loading Your Report"}
             </AppText>
           </View>
         ) : null}

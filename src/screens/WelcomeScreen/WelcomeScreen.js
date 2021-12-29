@@ -12,7 +12,7 @@ import { WelcomeScreenStyles } from "./WelcomeScreen.styles";
 import AppText from "../../components/AppText/AppText";
 import CardLink from "../../components/CardLink/CardLink";
 import reports from "../../../assets/reports.png";
-import services from "../../../assets/services.png";
+import tests from "../../../assets/tests.png";
 import aircraft from "../../../assets/aircraft.png";
 import feedback from "../../../assets/feedback.png";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -42,22 +42,14 @@ const WelcomeScreen = () => {
           color="white"
           style={WelcomeScreenStyles.title}
         >
-          GENOME
-        </AppText>
-        <AppText
-          variant="h1"
-          font="Poppins"
-          color="white"
-          style={WelcomeScreenStyles.title2}
-        >
-          CENTER
+          GENOME {"\n"}CENTER
         </AppText>
       </View>
 
       <View style={WelcomeScreenStyles.cardsContainer}>
         <View style={WelcomeScreenStyles.cardsColumn1}>
           <CardLink image={reports} text="REPORTS" to="Reports" />
-          <CardLink image={services} text="SERVICES" to="Services" />
+          <CardLink image={tests} text="SERVICES" to="Services" />
         </View>
         <View style={WelcomeScreenStyles.cardsColumn2}>
           <CardLink image={aircraft} text="APPROVED AIRLINES" to="Airlines" />

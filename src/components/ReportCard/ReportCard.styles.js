@@ -10,6 +10,7 @@ export const reportCardStyles = StyleSheet.create({
     borderRadius: 25,
     marginVertical: 8,
     backgroundColor: "white",
+    paddingTop: 4,
   },
   top: {
     height: 30,

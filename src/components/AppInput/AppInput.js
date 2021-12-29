@@ -6,7 +6,17 @@ import { AppInputStyles } from "./AppInput.styles";
 import { colors } from "../../utils/colors";
 import { Value } from "react-native-reanimated";
 
-const AppInput = ({ password, label, onChange, error, value }) => {
+const AppInput = ({
+  password,
+  label,
+  onChange,
+  error,
+  value,
+  width,
+  style,
+  type,
+  ...otherProps
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -14,7 +24,7 @@ const AppInput = ({ password, label, onChange, error, value }) => {
       label={label}
       onChangeText={onChange}
       secureTextEntry={!showPassword && password ? true : false}
-      style={AppInputStyles.root}
+      style={{ width: width || "100%", style, ...AppInputStyles.root }}
       right={
         password ? (
           <TextInput.Icon
@@ -31,6 +41,9 @@ const AppInput = ({ password, label, onChange, error, value }) => {
       underlineColor="black"
       error={error}
       value={value}
+      scrollEnabled={true}
+      type={type || "flat"}
+      {...otherProps}
     />
   );
 };

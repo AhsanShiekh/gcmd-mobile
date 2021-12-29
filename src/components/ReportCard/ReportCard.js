@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ToastAndroid } from "react-native";
 import { colors } from "../../utils/colors";
 import AppText from "../AppText/AppText";
 import { reportCardStyles } from "./ReportCard.styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
+import * as Clipboard from "expo-clipboard";
 
 const ReportCard = ({ data }) => {
   const [pending, setPending] = useState(0);
@@ -33,23 +34,45 @@ const ReportCard = ({ data }) => {
         <AppText variant="subtitle" font="Poppins">
           {data.PatientOrderNo}
         </AppText>
-        {data.LabNo && (
-          <AppText variant="subtitle" font="Poppins">
-            {data.LabNo}
-          </AppText>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            Clipboard.setString(data.PatientOrderNo);
+            ToastAndroid.show(
+              "Lab No Copied To Clipboard!",
+              ToastAndroid.SHORT
+            );
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
+            <Icon name="content-copy" size={17} color={"darkgrey"} />
+            <AppText variant="subtitle" font="Poppins" color="darkgrey">
+              Copy
+            </AppText>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={reportCardStyles.line} />
       <View style={reportCardStyles.middleContent}>
         <View style={reportCardStyles.middleTop}>
-          <AppText variant="subtitle" font="Poppins" weight="bold">
+          <AppText
+            variant="subtitle"
+            font="Poppins"
+            weight="bold"
+            color={"#052C66"}
+          >
             {data.PatientName}
           </AppText>
         </View>
         <View style={reportCardStyles.tests}>
           {data.PatientOrderDetails.map((test, i) => (
             <View style={reportCardStyles.test} key={i}>
-              <AppText variant="subtitle" font="Poppins">
+              <AppText
+                variant="subtitle"
+                font="Poppins"
+                color={"black"}
+                numberOfLines={1}
+                style={{ width: "90%" }}
+              >
                 {test.ServiceName}
               </AppText>
               <Icon

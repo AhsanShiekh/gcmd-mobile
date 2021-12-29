@@ -13,13 +13,6 @@ const AppText = ({
   center,
   ...otherProps
 }) => {
-  // const getStyle = (v) => {
-  //     if(v === "h1")
-  //         return "h1";
-  // }
-
-  // const styles = getStyle(variant);
-
   return (
     <Text
       style={{

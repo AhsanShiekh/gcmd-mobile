@@ -6,14 +6,9 @@ export const locationScreenStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  top: {
-    marginTop: StatusBar.currentHeight,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 65,
-  },
   map: {
-    height: "76%",
+    marginTop: StatusBar.currentHeight,
+    height: "85%",
     width: "100%",
   },
   bottom: {

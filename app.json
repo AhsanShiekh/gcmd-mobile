@@ -13,7 +13,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "com.genomelabs.genomecenter",
       "buildNumber": "1.0.0",
@@ -23,10 +25,15 @@
       "package": "com.genomelabs.genomecenter",
       "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/adaptiev-foreground.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyA54NxsFxatk-kI5XH6rad1UDsgqD2QDvQ"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

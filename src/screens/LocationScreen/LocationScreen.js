@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Dimensions } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import AppText from "../../components/AppText/AppText";
 import Hamburger from "../../components/Hamburger/Hamburger";
 import { locationScreenStyles } from "./LocationScreen.styles";
@@ -13,14 +13,9 @@ const regions = {
 const LocationScreen = () => {
   return (
     <View style={locationScreenStyles.root}>
-      <View style={locationScreenStyles.top}>
-        <Hamburger invert />
-        <AppText variant="h4" color="black" font="Poppins">
-          LOCATION
-        </AppText>
-      </View>
       <MapView
         style={locationScreenStyles.map}
+        provider={PROVIDER_GOOGLE}
         region={{
           longitude: 74.26908,
           latitude: 31.45403,
