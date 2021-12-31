@@ -12,7 +12,7 @@ import murad from "../../../assets/staff/sir-murad-min.jpg";
 import zubaria from "../../../assets/staff/mam-zubaria-min.jpg";
 import sajjad from "../../../assets/staff/sir-sajjad.jpeg";
 import bilal from "../../../assets/staff/sir-bilal-min.jpg";
-import rukhsana from "../../../assets/staff/rukhsana-min.jpg";
+import rukhsana from "../../../assets/staff/rukhsana-min.jpeg";
 import sehrish from "../../../assets/staff/sehrish-min.jpg";
 import shumaila from "../../../assets/staff/shumaila-min.jpg";
 import faiza from "../../../assets/staff/faiza-min.jpg";
@@ -25,9 +25,13 @@ import naila from "../../../assets/staff/naila-min.jpg";
 import adnan from "../../../assets/staff/adnan-min.jpg";
 import tariq from "../../../assets/staff/tariq-min.jpg";
 import ahsan from "../../../assets/staff/ahsan-.jpeg";
-import tahir from "../../../assets/staff/tahir-min.jpg";
+import tahir from "../../../assets/staff/tahir.jpeg";
 import faizan from "../../../assets/staff/faizan-min.jpg";
 import ahmad from "../../../assets/staff/ahmad.jpg";
+import maleeha from "../../../assets/staff/maleeha.jpeg";
+import nawaz from "../../../assets/staff/nawaz.jpg";
+import groupairport from "../../../assets/group-airport.jpeg";
+import counter from "../../../assets/counter.jpeg";
 
 const AboutScreen = () => {
   return (
@@ -56,6 +60,7 @@ const AboutScreen = () => {
         quantification currently available. For routine and special chemistry
         GCMD has systems from Roche and Biomeriex.
       </AppText>
+      <Image source={groupairport} style={aboutScreenStyles.thinimage} />
       <AppText
         variant={"subtitle"}
         font="Poppins"
@@ -91,6 +96,7 @@ const AboutScreen = () => {
         certain purposes). GCMD has affiliation regarding Covi19 External
         Quality Assurance, from NIH Pakistan and LGC UK.
       </AppText>
+      <Image source={counter} style={aboutScreenStyles.thinimage} />
       <AppText
         variant={"subtitle"}
         font="Poppins"
@@ -147,7 +153,7 @@ const AboutScreen = () => {
         <ManagerCard
           name="BILAL ARIF"
           image={bilal}
-          designation={"IT MANAGER"}
+          designation={"IT AND ACCOUNTS MANAGER"}
         />
         <View style={aboutScreenStyles.line} />
         <AppText variant={"h5"} font={"Poppins"} center>
@@ -173,17 +179,17 @@ const AboutScreen = () => {
             </AppText>
           </View>
           <View style={aboutScreenStyles.person}>
-            <Image source={sehrish} style={aboutScreenStyles.personImg} />
+            <Image source={adnan} style={aboutScreenStyles.personImg} />
             <AppText variant={"h6"} center font={"Poppins"}>
-              SEHRISH {"                    "} AJMAL
+              MUHAMMAD {"                    "} ADNAN
             </AppText>
           </View>
         </View>
         <View style={aboutScreenStyles.row}>
           <View style={aboutScreenStyles.person}>
-            <Image source={adnan} style={aboutScreenStyles.personImg} />
+            <Image source={sehrish} style={aboutScreenStyles.personImg} />
             <AppText variant={"h6"} center font={"Poppins"}>
-              MUHAMMAD {"                    "} ADNAN
+              SEHRISH {"                    "} AJMAL
             </AppText>
           </View>
         </View>
@@ -193,15 +199,23 @@ const AboutScreen = () => {
         </AppText>
         <View style={aboutScreenStyles.row}>
           <View style={aboutScreenStyles.person}>
-            <Image source={shumaila} style={aboutScreenStyles.personImg} />
-            <AppText variant={"h6"} center font={"Poppins"}>
-              SHUMAILA {"                   "} ALI
-            </AppText>
-          </View>
-          <View style={aboutScreenStyles.person}>
             <Image source={faiza} style={aboutScreenStyles.personImg} />
             <AppText variant={"h6"} center font={"Poppins"}>
               FAIZA {"                "} SHAFI
+            </AppText>
+          </View>
+          <View style={aboutScreenStyles.person}>
+            <Image source={maleeha} style={aboutScreenStyles.personImg} />
+            <AppText variant={"h6"} center font={"Poppins"}>
+              MALEEHA {"                "} AHMED
+            </AppText>
+          </View>
+        </View>
+        <View style={aboutScreenStyles.row}>
+          <View style={aboutScreenStyles.person}>
+            <Image source={shumaila} style={aboutScreenStyles.personImg} />
+            <AppText variant={"h6"} center font={"Poppins"}>
+              SHUMAILLA {"                   "} ALI
             </AppText>
           </View>
         </View>
@@ -284,6 +298,14 @@ const AboutScreen = () => {
             <Image source={tahir} style={aboutScreenStyles.personImg} />
             <AppText variant={"h6"} center font={"Poppins"}>
               MUHAMMAD {"                "} TAHIR
+            </AppText>
+          </View>
+        </View>
+        <View style={aboutScreenStyles.row}>
+          <View style={aboutScreenStyles.person}>
+            <Image source={nawaz} style={aboutScreenStyles.personImg} />
+            <AppText variant={"h6"} center font={"Poppins"}>
+              MUHAMMAD {"                "} NAWAZ
             </AppText>
           </View>
         </View>

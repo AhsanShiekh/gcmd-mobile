@@ -13,9 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.genomelabs.genomecenter",
       "buildNumber": "1.0.0",
@@ -25,7 +23,7 @@
       "package": "com.genomelabs.genomecenter",
       "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptiev-foreground.png",
+        "foregroundImage": "./assets/adaptive-foreground.png",
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan",

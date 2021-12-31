@@ -11,6 +11,12 @@ export const aboutScreenStyles = StyleSheet.create({
     borderRadius: 20,
     marginVertical: 15,
   },
+  thinimage: {
+    width: "98%",
+    height: 200,
+    borderRadius: 20,
+    marginVertical: 15,
+  },
   staff: {
     paddingBottom: 50,
     width: "100%",
