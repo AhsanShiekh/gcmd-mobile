@@ -21,7 +21,7 @@ const ServiceCard = ({ name, price, type, reportTime }) => {
       </View>
       <View style={serviceCardStyles.testAttribute}>
         <AppText variant={"subtitle"} weight={"bold"}>
-          TEST TYPE:
+          SPECIMEM:
         </AppText>
         <AppText variant={"subtitle"}>
           {"   "}
