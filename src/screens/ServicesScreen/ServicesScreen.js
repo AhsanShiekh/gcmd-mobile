@@ -10,6 +10,7 @@ import ServiceCard from "../../components/ServiceCard/ServiceCard";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setTests } from "../../redux/actions/reports.actions";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ServicesScreen = () => {
   const [showLoading, setShowLoading] = useState(false);
@@ -45,7 +46,7 @@ const ServicesScreen = () => {
   };
 
   return (
-    <View style={servicesScreenStyles.root}>
+    <SafeAreaView style={servicesScreenStyles.root}>
       <View style={servicesScreenStyles.top}>
         <Image source={testsImg} style={servicesScreenStyles.image} />
         <AppText variant={"h3"} color={colors.main} center font={"Raleway"}>
@@ -93,7 +94,7 @@ const ServicesScreen = () => {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -21,6 +21,7 @@ import { setCurrentUser } from "../../redux/actions/user.action";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../../utils/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -79,7 +80,7 @@ const LoginScreen = () => {
       resizeMode="cover"
       style={{ height: "100%", width: "100%" }}
     >
-      <View style={LoginScreenStyles.root}>
+      <SafeAreaView style={LoginScreenStyles.root}>
         <LinearGradient
           colors={[colors.main, "white", colors.main]}
           style={LoginScreenStyles.logoTextContainer}
@@ -129,7 +130,7 @@ const LoginScreen = () => {
             )}
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </ImageBackground>
   );
 };

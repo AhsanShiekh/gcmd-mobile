@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Dimensions } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { SafeAreaView } from "react-native-safe-area-context";
 import AppText from "../../components/AppText/AppText";
 import Hamburger from "../../components/Hamburger/Hamburger";
 import { locationScreenStyles } from "./LocationScreen.styles";
@@ -12,7 +13,7 @@ const regions = {
 
 const LocationScreen = () => {
   return (
-    <View style={locationScreenStyles.root}>
+    <SafeAreaView style={locationScreenStyles.root}>
       <MapView
         style={locationScreenStyles.map}
         provider={PROVIDER_GOOGLE}
@@ -37,7 +38,7 @@ const LocationScreen = () => {
           Cooperative Housing Society, Lahore
         </AppText>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

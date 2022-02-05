@@ -14,6 +14,7 @@ import * as Sharing from "expo-sharing";
 import * as FileSystem from "expo-file-system";
 import { useFocusEffect } from "@react-navigation/core";
 import { useSelector } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ReportScreen = ({ route, navigation }) => {
   const [loading, showLoading] = useState(false);
@@ -63,7 +64,7 @@ const ReportScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={reportScreenStyles.root}>
+    <SafeAreaView style={reportScreenStyles.root}>
       {!loading ? (
         <View style={reportScreenStyles.bottom}>
           <TouchableWithoutFeedback onPress={downloadFile}>
@@ -127,7 +128,7 @@ const ReportScreen = ({ route, navigation }) => {
           </View>
         ) : null}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

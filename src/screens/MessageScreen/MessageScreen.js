@@ -5,10 +5,11 @@ import AppText from "../../components/AppText/AppText";
 import done from "../../../assets/done.png";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MessageScreen = ({ navigation, route }) => {
   return (
-    <View style={messageScreenStyles.root}>
+    <SafeAreaView style={messageScreenStyles.root}>
       <View style={messageScreenStyles.content}>
         <Image source={done} style={messageScreenStyles.image} />
         <View style={messageScreenStyles.textContainer}>
@@ -25,7 +26,7 @@ const MessageScreen = ({ navigation, route }) => {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

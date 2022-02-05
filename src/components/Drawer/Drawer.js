@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import { setCurrentUser } from "../../redux/actions/user.action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CustomDrawer = (props) => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -35,7 +36,7 @@ const CustomDrawer = (props) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={drawerStyles.top}>
         <Image source={logo} style={drawerStyles.logo} />
 
@@ -146,7 +147,7 @@ const CustomDrawer = (props) => {
           </AppText>
         </View>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -14,6 +14,7 @@ import AppInput from "../../components/AppInput/AppInput";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from "axios";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const FeedbackScreen = () => {
   const [name, setName] = useState("");
@@ -43,7 +44,7 @@ const FeedbackScreen = () => {
   };
 
   return (
-    <View style={feedbackScreenStyles.root}>
+    <SafeAreaView style={feedbackScreenStyles.root}>
       <View style={feedbackScreenStyles.top}>
         <Image source={main} style={feedbackScreenStyles.img} />
         <AppText variant={"h3"} font={"Raleway"} color={colors.main} center>
@@ -96,7 +97,7 @@ const FeedbackScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

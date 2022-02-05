@@ -16,5 +16,6 @@ export const locationScreenStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.main,
+    paddingHorizontal: 15,
   },
 });

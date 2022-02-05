@@ -18,6 +18,7 @@ import { getReports } from "../../api/reports";
 import { setReports } from "../../redux/actions/reports.actions";
 import notFound from "../../../assets/not-found.png";
 import { useIsFocused } from "@react-navigation/core";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const today = new Date();
 const currentDate =
@@ -88,7 +89,7 @@ const ReportsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={reportScreenStyles.root}>
+    <SafeAreaView style={reportScreenStyles.root}>
       <View style={reportScreenStyles.top}>
         <View style={reportScreenStyles.header}>
           <Icon
@@ -249,7 +250,7 @@ const ReportsScreen = ({ navigation }) => {
           </AnimatedLoader>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

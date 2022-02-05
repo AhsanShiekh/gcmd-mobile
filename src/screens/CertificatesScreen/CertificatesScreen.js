@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, ImageBackground, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  Dimensions,
+  Platform,
+} from "react-native";
 import { certificatesScreenStyles } from "./CertificatesScreen.styles";
 import main from "../../../assets/certificates.png";
 import AppText from "../../components/AppText/AppText";
@@ -20,13 +27,14 @@ import cer9 from "../../../assets/certificates/13.png";
 import cer10 from "../../../assets/certificates/14.png";
 import cer11 from "../../../assets/certificates/15.png";
 import Modal from "react-native-modal";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CertificatesScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
 
   return (
-    <View style={certificatesScreenStyles.root}>
+    <SafeAreaView style={certificatesScreenStyles.root}>
       <View style={certificatesScreenStyles.top}>
         <Image source={main} style={certificatesScreenStyles.mainImg} />
         <AppText variant={"h3"} font={"Raleway"} center color={colors.main}>
@@ -190,7 +198,7 @@ const CertificatesScreen = () => {
         <Image
           source={currentImage}
           style={{
-            height: Dimensions.get("window").height,
+            // height: Dimensions.get("window").height,
             width: Dimensions.get("window").width,
             alignSelf: "flex-start",
             position: "absolute",
@@ -198,8 +206,21 @@ const CertificatesScreen = () => {
           }}
           resizeMode="contain"
         />
+        {Platform.OS === "ios" ? (
+          <TouchableWithoutFeedback
+            style={{
+              marginTop: "180%",
+              alignSelf: "center",
+            }}
+            onPress={() => setIsModalVisible(false)}
+          >
+            <AppText variant="h6" color={"white"} weight={"bold"}>
+              GO Back
+            </AppText>
+          </TouchableWithoutFeedback>
+        ) : null}
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
