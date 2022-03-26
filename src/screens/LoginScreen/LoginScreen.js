@@ -48,7 +48,6 @@ const LoginScreen = () => {
     }
 
     if (!user.Data.PatientId && !user.Data.PartyLocationId) {
-      console.log("here");
       setError(true);
       return;
     }

@@ -16,13 +16,15 @@ export const reportScreenStyles = StyleSheet.create({
   header: {
     height: "20%",
     width: "100%",
-    justifyContent: "flex-start",
-    marginTop: StatusBar.currentHeight,
+    justifyContent: "space-between",
+    marginTop: 15,
     alignItems: "center",
     flexDirection: "row",
+    overflow: "visible",
   },
   topContent: {
     height: "80%",
+    overflow: "visible",
   },
   dates: {
     width: "100%",

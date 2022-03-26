@@ -92,16 +92,48 @@ const ReportsScreen = ({ navigation }) => {
     <SafeAreaView style={reportScreenStyles.root}>
       <View style={reportScreenStyles.top}>
         <View style={reportScreenStyles.header}>
-          <Icon
-            name="arrow-back"
-            size={25}
-            color="white"
-            style={{ marginLeft: 20, marginRight: 10, marginBottom: 5 }}
-            onPress={() => navigation.goBack()}
-          />
-          <AppText variant="h5" color="white" font="Poppins">
-            REPORTS
-          </AppText>
+          <View style={{ flexDirection: "row", marginBottom: 10 }}>
+            <Icon
+              name="arrow-back"
+              size={25}
+              color="white"
+              style={{ marginLeft: 20, marginRight: 10, marginBottom: 5 }}
+              onPress={() => navigation.goBack()}
+            />
+            <AppText variant="h5" color="white" font="Poppins">
+              REPORTS
+            </AppText>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              marginBottom: 10,
+              justifyContent: "flex-start",
+              width: "40%",
+              marginRight: 20,
+              overflow: "visible",
+              height: 25,
+            }}
+          >
+            <Icon
+              name="account-circle"
+              size={25}
+              color="white"
+              style={{ marginLeft: 10, marginRight: 5 }}
+              onPress={() => navigation.goBack()}
+            />
+            <AppText
+              variant="h6"
+              color="white"
+              font="Poppins"
+              numberOfLines={1}
+              style={{ width: "90%" }}
+            >
+              {currentUser.UserName.includes(" ")
+                ? currentUser.UserName.split(" ")[0] + "..."
+                : currentUser.UserName}
+            </AppText>
+          </View>
         </View>
         <View style={reportScreenStyles.topContent}>
           <View style={reportScreenStyles.dates}>
