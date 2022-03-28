@@ -1,0 +1,15 @@
+com/genomelabs/genomecenter/MainActivity.java
+ com.genomelabs.genomecenter.MainActivity
+ com.genomelabs.genomecenter.MainActivity$1
+com/genomelabs/genomecenter/ReactNativeFlipper.java
+ com.genomelabs.genomecenter.ReactNativeFlipper
+ com.genomelabs.genomecenter.ReactNativeFlipper$1
+ com.genomelabs.genomecenter.ReactNativeFlipper$2
+ com.genomelabs.genomecenter.ReactNativeFlipper$2$1
+com/genomelabs/genomecenter/BuildConfig.java
+ com.genomelabs.genomecenter.BuildConfig
+com/genomelabs/genomecenter/MainApplication.java
+ com.genomelabs.genomecenter.MainApplication
+ com.genomelabs.genomecenter.MainApplication$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
