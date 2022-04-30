@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const FeedbackScreen = () => {
   const [name, setName] = useState("");
@@ -45,6 +46,7 @@ const FeedbackScreen = () => {
 
   return (
     <SafeAreaView style={feedbackScreenStyles.root}>
+      <BackHeader />
       <View style={feedbackScreenStyles.top}>
         <Image source={main} style={feedbackScreenStyles.img} />
         <AppText variant={"h3"} font={"Raleway"} color={colors.main} center>

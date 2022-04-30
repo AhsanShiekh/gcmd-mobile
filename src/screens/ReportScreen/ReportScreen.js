@@ -15,6 +15,7 @@ import * as FileSystem from "expo-file-system";
 import { useFocusEffect } from "@react-navigation/core";
 import { useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const ReportScreen = ({ route, navigation }) => {
   const [loading, showLoading] = useState(false);
@@ -25,20 +26,25 @@ const ReportScreen = ({ route, navigation }) => {
 
   const PDFURL =
     currentUser.software === "81"
-      ? `http://erp.genomelabs.com.pk:91/print/GetReport/${route.params.id}`
-      : `http://eerp.genomelabs.com.pk/print/GetReport/${route.params.id}`;
+      ? `http://erp.genomelabs.com.pk:91/print/GetReport/${route.params.id}/`
+      : `http://eerp.genomelabs.com.pk/print/GetReport/${route.params.id}/`;
 
-  useEffect(() => {
+  const setFile = async () => {
     showLoading(true);
-    let fileUri =
-      FileSystem.documentDirectory + `${route.params.name}_report.pdf`;
-    FileSystem.downloadAsync(PDFURL, fileUri)
+    let fileUri = FileSystem.cacheDirectory;
+    console.log(fileUri);
+    FileSystem.downloadAsync(PDFURL, `${fileUri}report.pdf`)
       .then(({ uri }) => {
+        console.log(uri);
         setFileUri(uri);
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  useEffect(() => {
+    setFile();
   }, [route]);
 
   const downloadFile = () => {
@@ -66,25 +72,35 @@ const ReportScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={reportScreenStyles.root}>
       {!loading ? (
-        <View style={reportScreenStyles.bottom}>
-          <TouchableWithoutFeedback onPress={downloadFile}>
-            <View style={reportScreenStyles.download}>
-              <Icon name="download" size={20} color="white" />
-              <AppText color="white" variant="subtitle" font="Raleway">
-                DOWNLOAD
-              </AppText>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={share}>
-            <View style={reportScreenStyles.share}>
-              <Icon name="share" size={20} color="white" />
-              <AppText color="white" variant="subtitle" font="Raleway">
-                SHARE
-              </AppText>
-              {shareLoading && <ActivityIndicator size="small" color="white" />}
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+        <>
+          <BackHeader />
+          <View style={reportScreenStyles.bottom}>
+            <TouchableWithoutFeedback onPress={downloadFile}>
+              <View style={reportScreenStyles.download}>
+                <Icon name="download" size={20} color="white" />
+                <AppText color="white" variant="subtitle" font="Raleway">
+                  DOWNLOAD
+                </AppText>
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                share();
+                console.log(fileUri);
+              }}
+            >
+              <View style={reportScreenStyles.share}>
+                <Icon name="share" size={20} color="white" />
+                <AppText color="white" variant="subtitle" font="Raleway">
+                  SHARE
+                </AppText>
+                {shareLoading && (
+                  <ActivityIndicator size="small" color="white" />
+                )}
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </>
       ) : null}
 
       <View style={reportScreenStyles.pdf}>
@@ -94,6 +110,7 @@ const ReportScreen = ({ route, navigation }) => {
           }}
           withScroll={true}
           withPinchZoom={true}
+          noLoader
           source={{
             uri: PDFURL,
           }}
@@ -117,6 +134,7 @@ const ReportScreen = ({ route, navigation }) => {
               position: "absolute",
               top: "40%",
               zIndex: 10,
+              height: "100%",
             }}
           >
             <ActivityIndicator size="large" color="black" />

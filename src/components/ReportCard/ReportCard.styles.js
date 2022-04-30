@@ -38,6 +38,10 @@ export const reportCardStyles = StyleSheet.create({
   },
   middleTop: {
     marginTop: 8,
+    marginBottom: 5,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   bottom: {
     height: 40,

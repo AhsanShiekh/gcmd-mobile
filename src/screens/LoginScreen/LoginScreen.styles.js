@@ -19,6 +19,7 @@ export const LoginScreenStyles = StyleSheet.create({
   logo: {
     height: 200,
     width: 200,
+    marginBottom: 10,
   },
   formContainer: {
     height: "30%",
@@ -33,6 +34,6 @@ export const LoginScreenStyles = StyleSheet.create({
     alignSelf: "flex-end",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "auto",
+    marginTop: 20,
   },
 });

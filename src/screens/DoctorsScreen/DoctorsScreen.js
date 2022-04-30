@@ -8,10 +8,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import drQaiser from "../../../assets/dr-qaiser.jpg";
 import drAgha from "../../../assets/dragha.jpg";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const DoctorsScreen = () => {
   return (
     <SafeAreaView style={doctorsScreenStyles.root}>
+      <BackHeader />
       <View style={doctorsScreenStyles.top}>
         <Image source={img} style={doctorsScreenStyles.image} />
         <AppText variant={"h3"} color={colors.main} center font="Raleway">

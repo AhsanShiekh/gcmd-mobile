@@ -92,7 +92,14 @@ const ReportsScreen = ({ navigation }) => {
     <SafeAreaView style={reportScreenStyles.root}>
       <View style={reportScreenStyles.top}>
         <View style={reportScreenStyles.header}>
-          <View style={{ flexDirection: "row", marginBottom: 10 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              marginBottom: 10,
+              height: 25,
+              overflow: "visible",
+            }}
+          >
             <Icon
               name="arrow-back"
               size={25}
@@ -108,7 +115,7 @@ const ReportsScreen = ({ navigation }) => {
             style={{
               flexDirection: "row",
               marginBottom: 10,
-              justifyContent: "flex-start",
+              justifyContent: "flex-end",
               width: "40%",
               marginRight: 20,
               overflow: "visible",
@@ -127,7 +134,6 @@ const ReportsScreen = ({ navigation }) => {
               color="white"
               font="Poppins"
               numberOfLines={1}
-              style={{ width: "90%" }}
             >
               {currentUser.UserName.includes(" ")
                 ? currentUser.UserName.split(" ")[0] + "..."

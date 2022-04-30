@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 import { colors } from "../../utils/colors";
 
 export const WelcomeScreenStyles = StyleSheet.create({
@@ -8,8 +8,9 @@ export const WelcomeScreenStyles = StyleSheet.create({
   title: {
     alignSelf: "center",
     marginLeft: 0,
+    marginRight: Platform.OS === "ios" ? 100 : 0,
     lineHeight: 50,
-    marginTop: 15,
+    marginTop: Platform.OS === "ios" ? 5 : 15,
   },
   top: {
     height: "35%",
@@ -43,5 +44,10 @@ export const WelcomeScreenStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     elevation: 10,
+  },
+  copyright: {
+    fontSize: 12,
+    marginLeft: 15,
+    marginBottom: 5,
   },
 });

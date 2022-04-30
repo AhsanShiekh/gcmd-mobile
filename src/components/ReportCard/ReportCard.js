@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ToastAndroid } from "react-native";
+import { View, Text, ToastAndroid, Platform, Alert } from "react-native";
 import { colors } from "../../utils/colors";
 import AppText from "../AppText/AppText";
 import { reportCardStyles } from "./ReportCard.styles";
@@ -7,10 +7,13 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 import * as Clipboard from "expo-clipboard";
+import CommentModal from "../CommentModal/CommentModal";
 
 const ReportCard = ({ data }) => {
   const [pending, setPending] = useState(0);
   const [allPending, setAllPending] = useState(false);
+  const [showCommentModal, setShowCommentModal] = useState(false);
+  const [commentData, setCommentData] = useState([]);
   const navigation = useNavigation();
 
   const status = () => {
@@ -30,6 +33,11 @@ const ReportCard = ({ data }) => {
 
   return (
     <View style={reportCardStyles.root}>
+      <CommentModal
+        show={showCommentModal}
+        onClose={() => setShowCommentModal(false)}
+        data={commentData}
+      />
       <View style={reportCardStyles.top}>
         <AppText variant="subtitle" font="Poppins">
           {data.PatientOrderNo}
@@ -37,10 +45,15 @@ const ReportCard = ({ data }) => {
         <TouchableOpacity
           onPress={() => {
             Clipboard.setString(data.PatientOrderNo);
-            ToastAndroid.show(
-              "Lab No Copied To Clipboard!",
-              ToastAndroid.SHORT
-            );
+
+            if (Platform.OS === "android") {
+              ToastAndroid.show(
+                "Lab No Copied To Clipboard!",
+                ToastAndroid.SHORT
+              );
+            } else {
+              Alert.alert("Lab Number Copied!");
+            }
           }}
         >
           <View style={{ flexDirection: "row" }}>
@@ -62,6 +75,17 @@ const ReportCard = ({ data }) => {
           >
             {data.PatientName}
           </AppText>
+
+          {data.InternalRefNo ? (
+            <AppText
+              variant="subtitle"
+              font="Poppins"
+              weight="bold"
+              color={"#000"}
+            >
+              {data.InternalRefNo}
+            </AppText>
+          ) : null}
         </View>
         <View style={reportCardStyles.tests}>
           {data.PatientOrderDetails.map((test, i) => (
@@ -89,6 +113,30 @@ const ReportCard = ({ data }) => {
           <AppText variant="subtitle" font="Poppins">
             {data.CreatedOn}
           </AppText>
+          {data.AlertList.length ? (
+            <TouchableOpacity
+              onPress={() => {
+                setCommentData(data.AlertList);
+                setShowCommentModal(true);
+              }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <AppText
+                  variant="subtitle"
+                  font="Poppins"
+                  color={"red"}
+                  style={{ textDecorationLine: "underline", marginTop: 5 }}
+                >
+                  See Comments
+                </AppText>
+                <Icon
+                  style={{ marginLeft: 10, color: "#EFBA19" }}
+                  size={22}
+                  name="notifications"
+                />
+              </View>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
       <View style={reportCardStyles.line} />

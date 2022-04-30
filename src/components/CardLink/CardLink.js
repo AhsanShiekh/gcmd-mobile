@@ -8,7 +8,7 @@ import { colors } from "../../utils/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { BoxShadow } from "react-native-shadow";
 
-const CardLink = ({ image, text, to }) => {
+const CardLink = ({ image, text, to, onPress }) => {
   const navigation = useNavigation();
 
   const shadowOpt = {
@@ -26,7 +26,9 @@ const CardLink = ({ image, text, to }) => {
 
   return (
     <BoxShadow setting={shadowOpt}>
-      <TouchableOpacity onPress={() => navigation.navigate(to)}>
+      <TouchableOpacity
+        onPress={onPress ? () => onPress() : () => navigation.navigate(to)}
+      >
         <View style={CardLinkStyles.root}>
           <View style={CardLinkStyles.iconContainer}>
             <Image source={image} style={CardLinkStyles.image} />

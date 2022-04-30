@@ -33,6 +33,7 @@ import nawaz from "../../../assets/staff/nawaz.jpg";
 import groupairport from "../../../assets/group-airport.jpeg";
 import counter from "../../../assets/counter.jpeg";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const AboutScreen = () => {
   return (
@@ -41,6 +42,7 @@ const AboutScreen = () => {
         contentContainerStyle={{ alignItems: "center" }}
         style={aboutScreenStyles.root}
       >
+        <BackHeader />
         <Image source={main} style={aboutScreenStyles.image} />
         <AppText variant={"h3"} font="Poppins" center>
           SO, WHO ARE WE?
@@ -207,7 +209,7 @@ const AboutScreen = () => {
             <View style={aboutScreenStyles.person}>
               <Image source={faiza} style={aboutScreenStyles.personImg} />
               <AppText variant={"h6"} center font={"Poppins"}>
-                FAIZA {"                "} SHAFI
+                FAIZA {"                                  "} SHAFI
               </AppText>
             </View>
             <View style={aboutScreenStyles.person}>
@@ -239,7 +241,7 @@ const AboutScreen = () => {
             <View style={aboutScreenStyles.person}>
               <Image source={laiba} style={aboutScreenStyles.personImg} />
               <AppText variant={"h6"} center font={"Poppins"}>
-                LAIBA {"                "} ISHAQ
+                LAIBA {"                                  "} ISHAQ
               </AppText>
             </View>
           </View>
@@ -261,7 +263,7 @@ const AboutScreen = () => {
               </AppText>
             </View>
           </View>
-          <View style={aboutScreenStyles.row}>
+          {/* <View style={aboutScreenStyles.row}>
             <View style={aboutScreenStyles.person}>
               <Image source={ahsan} style={aboutScreenStyles.personImg} />
               <AppText variant={"h6"} center font={"Poppins"}>
@@ -274,7 +276,7 @@ const AboutScreen = () => {
                 AHMAD {"                   "} MUMTAZ
               </AppText>
             </View>
-          </View>
+          </View> */}
           <View style={aboutScreenStyles.row}>
             <View style={aboutScreenStyles.person}>
               <Image source={anum} style={aboutScreenStyles.personImg} />
@@ -285,7 +287,7 @@ const AboutScreen = () => {
             <View style={aboutScreenStyles.person}>
               <Image source={naila} style={aboutScreenStyles.personImg} />
               <AppText variant={"h6"} center font={"Poppins"}>
-                NAILA {"                "} SHAFI
+                NAILA {"                                  "} SHAFI
               </AppText>
             </View>
           </View>

@@ -20,8 +20,8 @@ const AppText = ({
         fontFamily: font,
         fontWeight: weight || "normal",
         textAlign: center ? "center" : "left",
-        ...style,
         ...AppTextStyles[variant],
+        ...style,
       }}
       {...otherProps}
     >

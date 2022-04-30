@@ -3,6 +3,7 @@ import { View, Text, Dimensions } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppText from "../../components/AppText/AppText";
+import BackHeader from "../../components/BackHeader/BackHeader";
 import Hamburger from "../../components/Hamburger/Hamburger";
 import { locationScreenStyles } from "./LocationScreen.styles";
 
@@ -14,6 +15,7 @@ const regions = {
 const LocationScreen = () => {
   return (
     <SafeAreaView style={locationScreenStyles.root}>
+      <BackHeader />
       <MapView
         style={locationScreenStyles.map}
         provider={PROVIDER_GOOGLE}

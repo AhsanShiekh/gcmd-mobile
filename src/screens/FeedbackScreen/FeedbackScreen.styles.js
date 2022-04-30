@@ -11,7 +11,7 @@ export const feedbackScreenStyles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: StatusBar.currentHeight,
+    marginTop: StatusBar.currentHeight + 50,
   },
   img: {
     height: 150,

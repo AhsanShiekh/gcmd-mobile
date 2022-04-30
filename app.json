@@ -16,8 +16,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.genomelabs.genomecenter",
-      "buildNumber": "1.0.0",
-      "supportsTablet": true,
+      "buildNumber": "1.2.0",
+      "supportsTablet": false,
       "infoPlist": {
         "supportsTablet": false,
         "infoPlist": {
@@ -25,11 +25,14 @@
             "NSAllowsArbitraryLoads": true
           }
         }
+      },
+      "config": {
+        "googleMapsApiKey": "AIzaSyAGicbxleqnxaPX-rmPhyJ0LvQ6opg-XuU"
       }
     },
     "android": {
       "package": "com.genomelabs.genomecenter",
-      "versionCode": 4,
+      "versionCode": 5,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-foreground.png",
         "backgroundColor": "#FFFFFF"

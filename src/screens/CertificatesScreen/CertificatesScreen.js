@@ -28,6 +28,7 @@ import cer10 from "../../../assets/certificates/14.png";
 import cer11 from "../../../assets/certificates/15.png";
 import Modal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const CertificatesScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -35,6 +36,7 @@ const CertificatesScreen = () => {
 
   return (
     <SafeAreaView style={certificatesScreenStyles.root}>
+      <BackHeader />
       <View style={certificatesScreenStyles.top}>
         <Image source={main} style={certificatesScreenStyles.mainImg} />
         <AppText variant={"h3"} font={"Raleway"} center color={colors.main}>

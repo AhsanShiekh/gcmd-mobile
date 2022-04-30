@@ -6,10 +6,12 @@ import AppText from "../../components/AppText/AppText";
 import { colors } from "../../utils/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const TimingScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={timingScreenStyles.root}>
+      <BackHeader />
       <View style={timingScreenStyles.top}>
         <Image source={img} style={timingScreenStyles.image} />
         <AppText color={colors.main} variant="h2" font="Raleway" center>

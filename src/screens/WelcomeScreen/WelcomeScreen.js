@@ -39,7 +39,7 @@ const WelcomeScreen = () => {
         <View style={WelcomeScreenStyles.top}>
           <Hamburger />
           <AppText
-            variant="h1"
+            variant={Platform.OS === "android" ? "h1" : "h2"}
             font="Poppins"
             color="white"
             style={WelcomeScreenStyles.title}
@@ -51,7 +51,15 @@ const WelcomeScreen = () => {
         <View style={WelcomeScreenStyles.cardsContainer}>
           <View style={WelcomeScreenStyles.cardsColumn1}>
             <CardLink image={reports} text="REPORTS" to="Reports" />
-            <CardLink image={tests} text="SERVICES" to="Services" />
+            <CardLink
+              image={tests}
+              text="SERVICES"
+              onPress={() =>
+                Linking.openURL(
+                  "https://drive.google.com/file/d/1wLHbu6jo2ET_8pYCCORlA4vhCpH3VlQK/view?usp=sharing"
+                )
+              }
+            />
           </View>
           <View style={WelcomeScreenStyles.cardsColumn2}>
             <CardLink image={aircraft} text="APPROVED AIRLINES" to="Airlines" />
@@ -72,6 +80,13 @@ const WelcomeScreen = () => {
             <Icon name="phone" size={40} color="white" />
           </TouchableOpacity>
         </View>
+        <AppText
+          variant={"subtitle"}
+          color="black"
+          style={WelcomeScreenStyles.copyright}
+        >
+          Designed and Developed by ECARE SOLUTIONS
+        </AppText>
       </SafeAreaView>
     </ImageBackground>
   );

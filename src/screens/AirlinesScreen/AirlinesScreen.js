@@ -7,6 +7,7 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import airlinesImage from "../../../assets/aircraft.png";
 import { SafeAreaView } from "react-native-safe-area-context";
+import BackHeader from "../../components/BackHeader/BackHeader";
 
 const airlines = [
   "PIA",
@@ -56,6 +57,7 @@ const AirlineScreen = () => {
 
   return (
     <SafeAreaView style={airlineScreenStyles.root}>
+      <BackHeader />
       <View style={airlineScreenStyles.top}>
         <Image source={airlinesImage} style={airlineScreenStyles.image} />
         <AppText variant={"h2"} font="Poppins" color={colors.main}>
